@@ -220,9 +220,17 @@
 
 <?php $__env->startPush('scripts'); ?>
 <script>
+// Test jQuery dan Leaflet
+console.log('jQuery loaded:', typeof $ !== 'undefined');
+console.log('Leaflet loaded:', typeof L !== 'undefined');
+
 $(document).ready(function() {
+    console.log('DOM Ready!');
+    
     // Initialize map
+    console.log('Initializing map...');
     const map = L.map('map').setView([2.9833, 99.6167], 11);
+    console.log('Map initialized:', map);
     
     // OpenStreetMap - Clean tanpa label usaha bawaan
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -293,6 +301,7 @@ $(document).ready(function() {
     $.ajax({
         url: '/api/businesses',
         success: function(businesses) {
+            console.log('Businesses loaded:', businesses.length, businesses);
             allBusinesses = businesses;
             
             // Populate kecamatan dropdown
@@ -304,20 +313,29 @@ $(document).ready(function() {
             
             // Display all markers initially
             displayMarkers(businesses);
+        },
+        error: function(xhr, status, error) {
+            console.error('Failed to load businesses:', status, error);
         }
     });
     
     // Display markers function
     function displayMarkers(businesses) {
+        console.log('displayMarkers called with', businesses.length, 'businesses');
+        
         // Clear existing markers
         markers.forEach(m => map.removeLayer(m));
         markers = [];
         
         // Add new markers
         businesses.forEach(function(business) {
+            console.log('Processing business:', business.business_name, 'at', business.latitude, business.longitude);
+            
             if (business.latitude && business.longitude) {
                 const icon = getBusinessIcon(business.business_type, business.business_name);
                 const marker = L.marker([business.latitude, business.longitude], { icon: icon });
+                
+                console.log('Marker created for:', business.business_name);
                 
                 marker.businessData = business; // Store for filtering
                 

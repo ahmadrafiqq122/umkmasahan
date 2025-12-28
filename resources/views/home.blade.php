@@ -222,9 +222,17 @@
 
 @push('scripts')
 <script>
+// Test jQuery dan Leaflet
+console.log('jQuery loaded:', typeof $ !== 'undefined');
+console.log('Leaflet loaded:', typeof L !== 'undefined');
+
 $(document).ready(function() {
+    console.log('DOM Ready!');
+    
     // Initialize map
+    console.log('Initializing map...');
     const map = L.map('map').setView([2.9833, 99.6167], 11);
+    console.log('Map initialized:', map);
     
     // OpenStreetMap - Clean tanpa label usaha bawaan
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
