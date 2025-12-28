@@ -250,41 +250,38 @@ $(document).ready(function() {
         
         return L.divIcon({
             html: `
-                <div style="text-align: center; position: relative;">
+                <div style="display: inline-block; text-align: center;">
                     <div style="
                         background: ${item.color};
-                        width: 36px;
-                        height: 36px;
+                        width: 32px;
+                        height: 32px;
                         border-radius: 50%;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        border: 3px solid white;
-                        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+                        border: 2px solid white;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
                         cursor: pointer;
-                        transition: transform 0.2s;
-                        margin: 0 auto;
+                        margin: 0 auto 2px auto;
                     ">
-                        <span style="font-size: 1.3rem;">${item.icon}</span>
+                        <span style="font-size: 1.1rem;">${item.icon}</span>
                     </div>
                     <div style="
-                        background: white;
+                        background: rgba(255,255,255,0.95);
                         color: #333;
-                        padding: 2px 6px;
-                        border-radius: 3px;
-                        font-size: 0.7rem;
+                        padding: 1px 4px;
+                        border-radius: 2px;
+                        font-size: 9px;
                         font-weight: 600;
                         white-space: nowrap;
-                        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-                        margin-top: 3px;
-                        border: 1px solid #ddd;
+                        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
                     ">${displayName}</div>
                 </div>
             `,
             className: 'marker-with-label',
-            iconSize: [100, 60],
-            iconAnchor: [50, 18],
-            popupAnchor: [0, -18]
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+            popupAnchor: [0, -20]
         });
     }
     
