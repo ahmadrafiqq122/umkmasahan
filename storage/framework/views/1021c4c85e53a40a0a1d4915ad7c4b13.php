@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Peta Digital UMKM') - Dinas Koperasi, Perdagangan dan Perindustrian Kabupaten Asahan</title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <title><?php echo $__env->yieldContent('title', 'Peta Digital UMKM'); ?> - Dinas Koperasi, Perdagangan dan Perindustrian Kabupaten Asahan</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo-asahan.png') }}">
+    <link rel="icon" type="image/png" href="<?php echo e(asset('images/logo-asahan.png')); ?>">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,12 +19,12 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <!-- Asahan Theme CSS -->
-    <link rel="stylesheet" href="{{ asset('css/asahan-theme.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('css/asahan-theme.css')); ?>">
     
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     
-    @stack('styles')
+    <?php echo $__env->yieldPushContent('styles'); ?>
     
     <!-- Custom CSS -->
     <style>
@@ -375,129 +375,22 @@
             transform: scale(1.2);
         }
 
-        /* ============================================ */
-        /* RESPONSIVE DESIGN UNTUK HP */
-        /* ============================================ */
-        
         @media (max-width: 768px) {
             #map {
                 height: 400px;
             }
             
-            /* Header Dinas - Mobile */
-            .main-header {
-                padding: 1rem 0 !important;
-            }
-            
-            .logo-dinas {
-                height: 50px !important;
-                width: auto !important;
-            }
-            
-            .header-text-wrapper h3 {
-                font-size: 0.9rem !important;
-                line-height: 1.3 !important;
-            }
-            
-            .header-text-wrapper h4 {
-                font-size: 0.85rem !important;
-            }
-            
-            .header-text-wrapper .row.g-2 {
-                display: none !important; /* Hide contact info on mobile */
-            }
-            
-            .header-text-wrapper .col-auto div[style*="width: 4px"] {
-                display: none !important; /* Hide separator lines */
-            }
-            
-            /* Navbar - Mobile */
-            .navbar-asahan {
-                padding: 0.5rem 0 !important;
-            }
-            
             .logo-header {
-                height: 30px !important;
+                height: 30px;
             }
             
             .navbar-brand {
-                font-size: 0.85rem !important;
-            }
-            
-            .navbar-nav {
-                background: white;
-                padding: 1rem;
-                border-radius: 8px;
-                margin-top: 0.5rem;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            }
-            
-            .nav-link {
-                padding: 0.75rem 1rem !important;
-                border-bottom: 1px solid #e9ecef;
-            }
-            
-            .nav-link:last-child {
-                border-bottom: none;
-            }
-            
-            /* Footer - Mobile */
-            .footer-asahan {
-                padding: 2rem 0 !important;
-            }
-            
-            .footer-asahan h5 {
-                font-size: 1rem !important;
-                margin-top: 1.5rem;
-            }
-            
-            .footer-asahan h5:first-child {
-                margin-top: 0;
-            }
-            
-            .footer-asahan p,
-            .footer-asahan ul li {
-                font-size: 0.85rem !important;
-            }
-            
-            .footer-bottom {
-                padding: 1rem 0 !important;
-                text-align: center !important;
-            }
-            
-            .footer-bottom .row > div {
-                margin-bottom: 0.5rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .main-header {
-                padding: 0.75rem 0 !important;
-            }
-            
-            .logo-dinas {
-                height: 40px !important;
-            }
-            
-            .header-text-wrapper h3 {
-                font-size: 0.75rem !important;
-            }
-            
-            .header-text-wrapper h4 {
-                font-size: 0.7rem !important;
-            }
-            
-            .navbar-brand {
-                font-size: 0.75rem !important;
-            }
-            
-            .logo-header {
-                height: 25px !important;
+                font-size: 0.9rem;
             }
         }
     </style>
     
-    @stack('styles')
+    <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 <body>
     <!-- Main Header -->
@@ -506,11 +399,11 @@
             <div class="header-text-wrapper">
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        @if(file_exists(public_path('images/logo-asahan.png')))
-                            <img src="{{ asset('images/logo-asahan.png') }}" alt="Logo Kabupaten Asahan" class="logo-dinas">
-                        @else
+                        <?php if(file_exists(public_path('images/logo-asahan.png'))): ?>
+                            <img src="<?php echo e(asset('images/logo-asahan.png')); ?>" alt="Logo Kabupaten Asahan" class="logo-dinas">
+                        <?php else: ?>
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Coat_of_arms_of_Asahan_Regency.svg/150px-Coat_of_arms_of_Asahan_Regency.svg.png" alt="Logo Kabupaten Asahan" class="logo-dinas">
-                        @endif
+                        <?php endif; ?>
                     </div>
                     <div class="col-auto">
                         <div style="width: 4px; height: 90px; background: linear-gradient(to bottom, var(--asahan-green), var(--asahan-gold)); border-radius: 2px;"></div>
@@ -560,59 +453,59 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto align-items-lg-center">
-                    @guest
+                    <?php if(auth()->guard()->guest()): ?>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                            <a class="nav-link <?php echo e(request()->routeIs('home') ? 'active' : ''); ?>" href="<?php echo e(route('home')); ?>">
                                 <i class="bi bi-house-door me-1"></i>Beranda
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">
+                            <a class="nav-link <?php echo e(request()->routeIs('login') ? 'active' : ''); ?>" href="<?php echo e(route('login')); ?>">
                                 <i class="bi bi-box-arrow-in-right me-1"></i>Login
                             </a>
                         </li>
                         <li class="nav-item ms-lg-2">
-                            <a class="btn btn-gold" href="{{ route('register') }}">
+                            <a class="btn btn-gold" href="<?php echo e(route('register')); ?>">
                                 <i class="bi bi-person-plus me-1"></i>Daftar Sekarang
                             </a>
                         </li>
-                    @else
+                    <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                            <a class="nav-link <?php echo e(request()->routeIs('home') ? 'active' : ''); ?>" href="<?php echo e(route('home')); ?>">
                                 <i class="bi bi-house-door me-1"></i>Beranda
                             </a>
                         </li>
-                        @if(auth()->user()->isAdmin())
+                        <?php if(auth()->user()->isAdmin()): ?>
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                                <a class="nav-link <?php echo e(request()->routeIs('admin.dashboard') ? 'active' : ''); ?>" href="<?php echo e(route('admin.dashboard')); ?>">
                                     <i class="bi bi-speedometer2 me-1"></i>Dashboard Admin
                                 </a>
                             </li>
-                        @else
+                        <?php else: ?>
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}" href="{{ route('user.dashboard') }}">
+                                <a class="nav-link <?php echo e(request()->routeIs('user.dashboard') ? 'active' : ''); ?>" href="<?php echo e(route('user.dashboard')); ?>">
                                     <i class="bi bi-speedometer2 me-1"></i>Dashboard
                                 </a>
                             </li>
-                        @endif
+                        <?php endif; ?>
                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" style="gap: 0.5rem;">
                                 <div style="width: 32px; height: 32px; background: rgba(244,196,48,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                                     <i class="bi bi-person-fill" style="color: #F4C430;"></i>
                                 </div>
-                                <span>{{ auth()->user()->name }}</span>
+                                <span><?php echo e(auth()->user()->name); ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
                                 <li>
-                                    <a class="dropdown-item" href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}">
+                                    <a class="dropdown-item" href="<?php echo e(auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard')); ?>">
                                         <i class="bi bi-speedometer2 me-2"></i>Dashboard
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                        @csrf
+                                    <form action="<?php echo e(route('logout')); ?>" method="POST" class="d-inline">
+                                        <?php echo csrf_field(); ?>
                                         <button type="submit" class="dropdown-item text-danger">
                                             <i class="bi bi-box-arrow-right me-2"></i>Logout
                                         </button>
@@ -620,7 +513,7 @@
                                 </li>
                             </ul>
                         </li>
-                    @endguest
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -628,7 +521,7 @@
 
     <!-- Content -->
     <main>
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </main>
 
     <!-- Footer Asahan -->
@@ -637,12 +530,12 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <div class="footer-logo">
-                        @if(file_exists(public_path('images/logo-asahan.png')))
-                            <img src="{{ asset('images/logo-asahan.png') }}" alt="Logo Asahan">
-                        @endif
-                        @if(file_exists(public_path('images/logo-disperindagkop.png')))
-                            <img src="{{ asset('images/logo-disperindagkop.png') }}" alt="Logo Disperindagkop">
-                        @endif
+                        <?php if(file_exists(public_path('images/logo-asahan.png'))): ?>
+                            <img src="<?php echo e(asset('images/logo-asahan.png')); ?>" alt="Logo Asahan">
+                        <?php endif; ?>
+                        <?php if(file_exists(public_path('images/logo-disperindagkop.png'))): ?>
+                            <img src="<?php echo e(asset('images/logo-disperindagkop.png')); ?>" alt="Logo Disperindagkop">
+                        <?php endif; ?>
                     </div>
                     <h5 class="mb-3">Peta Digital UMKM Asahan</h5>
                     <p style="color: var(--gray-300); line-height: 1.6;">
@@ -661,27 +554,27 @@
                     <h5>Link Cepat</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a href="{{ route('home') }}">
+                            <a href="<?php echo e(route('home')); ?>">
                                 <i class="bi bi-chevron-right me-2"></i>Beranda
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('register') }}">
+                            <a href="<?php echo e(route('register')); ?>">
                                 <i class="bi bi-chevron-right me-2"></i>Daftar UMKM
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('login') }}">
+                            <a href="<?php echo e(route('login')); ?>">
                                 <i class="bi bi-chevron-right me-2"></i>Login
                             </a>
                         </li>
-                        @auth
+                        <?php if(auth()->guard()->check()): ?>
                         <li class="mb-2">
-                            <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}">
+                            <a href="<?php echo e(auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard')); ?>">
                                 <i class="bi bi-chevron-right me-2"></i>Dashboard
                             </a>
                         </li>
-                        @endauth
+                        <?php endif; ?>
                     </ul>
                 </div>
                 
@@ -718,7 +611,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
                     <p class="mb-0" style="color: var(--gray-300); font-size: 0.9rem;">
-                        &copy; {{ date('Y') }} Disperindagkop Kabupaten Asahan. All Rights Reserved.
+                        &copy; <?php echo e(date('Y')); ?> Disperindagkop Kabupaten Asahan. All Rights Reserved.
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
@@ -744,39 +637,40 @@
 
     <script>
         // Show flash messages
-        @if(session('success'))
+        <?php if(session('success')): ?>
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil!',
-                text: '{{ session('success') }}',
+                text: '<?php echo e(session('success')); ?>',
                 showConfirmButton: false,
                 timer: 3000
             });
-        @endif
+        <?php endif; ?>
 
-        @if(session('error'))
+        <?php if(session('error')): ?>
             Swal.fire({
                 icon: 'error',
                 title: 'Error!',
-                text: '{{ session('error') }}',
+                text: '<?php echo e(session('error')); ?>',
                 showConfirmButton: true
             });
-        @endif
+        <?php endif; ?>
 
-        @if($errors->any())
+        <?php if($errors->any()): ?>
             Swal.fire({
                 icon: 'error',
                 title: 'Validasi Error!',
                 html: '<ul class="text-start">' +
-                    @foreach($errors->all() as $error)
-                        '<li>{{ $error }}</li>' +
-                    @endforeach
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        '<li><?php echo e($error); ?></li>' +
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 '</ul>',
                 showConfirmButton: true
             });
-        @endif
+        <?php endif; ?>
     </script>
     
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
+<?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/umkm/resources/views/layouts/app.blade.php ENDPATH**/ ?>

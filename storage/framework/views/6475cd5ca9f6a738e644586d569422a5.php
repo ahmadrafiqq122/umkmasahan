@@ -1,9 +1,7 @@
-@extends('layouts.app')
+<?php $__env->startSection('title', 'Beranda - Peta Digital UMKM Kabupaten Asahan'); ?>
 
-@section('title', 'Beranda - Peta Digital UMKM Kabupaten Asahan')
-
-@push('styles')
-<link rel="stylesheet" href="{{ asset('css/modern-animations.css') }}">
+<?php $__env->startPush('styles'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/modern-animations.css')); ?>">
 <style>
     .hero-asahan {
         background: linear-gradient(135deg, #0d2818 0%, #1a4d2e 50%, #2d6a4f 100%);
@@ -213,162 +211,27 @@
         box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
     
-    /* ============================================ */
-    /* RESPONSIVE DESIGN UNTUK HP - DIPERBAIKI */
-    /* ============================================ */
-    
-    /* HP Kecil dan Sedang (max 768px) */
     @media (max-width: 768px) {
-        .hero-asahan {
-            padding: 4rem 0 3rem !important;
-            min-height: auto !important;
-        }
-        
-        .hero-badge {
-            font-size: 0.8rem !important;
-            padding: 0.5rem 1rem !important;
-            margin-bottom: 1rem !important;
-        }
-        
         .hero-title {
-            font-size: 2rem !important;
-            margin-bottom: 1rem !important;
-        }
-        
-        .hero-title .highlight {
-            font-size: 2.5rem !important;
+            font-size: 2rem;
         }
         
         .hero-subtitle {
-            font-size: 1rem !important;
-            margin-bottom: 1.5rem !important;
-            line-height: 1.6 !important;
-        }
-        
-        .hero-3d-icon {
-            font-size: 8rem !important;
-        }
-        
-        .btn-hero {
-            padding: 0.75rem 1.5rem !important;
-            font-size: 1rem !important;
-            width: 100% !important;
-            margin-bottom: 0.75rem !important;
+            font-size: 1rem;
         }
         
         .stats-card {
-            margin-bottom: 1rem !important;
-            padding: 1.5rem 1rem !important;
-        }
-        
-        .stats-value {
-            font-size: 2rem !important;
-        }
-        
-        .stats-label {
-            font-size: 0.9rem !important;
-        }
-        
-        .stats-icon {
-            font-size: 2rem !important;
-        }
-        
-        .feature-card {
-            padding: 1.5rem !important;
-            margin-bottom: 1rem !important;
-        }
-        
-        .feature-icon {
-            width: 60px !important;
-            height: 60px !important;
-            font-size: 1.5rem !important;
+            margin-bottom: 1rem;
         }
         
         .map-container {
-            height: 400px !important;
-        }
-        
-        /* Section spacing lebih kecil */
-        .container {
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
-        }
-        
-        section {
-            padding: 3rem 0 !important;
-        }
-        
-        h2 {
-            font-size: 1.75rem !important;
-        }
-        
-        .search-card {
-            padding: 1.5rem !important;
-        }
-        
-        .form-control, .form-select {
-            font-size: 16px !important; /* Prevent zoom on iOS */
-        }
-    }
-    
-    /* HP Sangat Kecil (max 576px) */
-    @media (max-width: 576px) {
-        .hero-asahan {
-            padding: 3rem 0 2rem !important;
-        }
-        
-        .hero-title {
-            font-size: 1.75rem !important;
-        }
-        
-        .hero-title .highlight {
-            font-size: 2rem !important;
-        }
-        
-        .hero-subtitle {
-            font-size: 0.95rem !important;
-        }
-        
-        .hero-badge {
-            font-size: 0.75rem !important;
-        }
-        
-        .stats-value {
-            font-size: 1.75rem !important;
-        }
-        
-        .stats-label {
-            font-size: 0.85rem !important;
-        }
-        
-        h2 {
-            font-size: 1.5rem !important;
-        }
-        
-        .map-container {
-            height: 350px !important;
-        }
-    }
-    
-    /* Landscape mode untuk HP */
-    @media (max-width: 768px) and (orientation: landscape) {
-        .hero-asahan {
-            min-height: auto !important;
-            padding: 2rem 0 !important;
-        }
-        
-        .hero-3d-icon {
-            font-size: 6rem !important;
-        }
-        
-        .map-container {
-            height: 300px !important;
+            height: 400px;
         }
     }
 </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- Hero Section - Ultra Modern -->
 <section class="hero-asahan">
     <div class="container">
@@ -387,21 +250,21 @@
                     Anda dengan teknologi peta satelit <strong>beresolusi tinggi</strong> yang menampilkan detail hingga tingkat rumah.
                 </p>
                 <div class="d-flex flex-wrap gap-3">
-                    @guest
-                        <a href="{{ route('register') }}" class="btn btn-asahan-gold btn-hero ripple">
+                    <?php if(auth()->guard()->guest()): ?>
+                        <a href="<?php echo e(route('register')); ?>" class="btn btn-asahan-gold btn-hero ripple">
                             <i class="bi bi-rocket-takeoff me-2"></i>Mulai Sekarang - Gratis!
                         </a>
                         <a href="#peta-umkm" class="btn btn-hero glass-card ripple" style="color: white; border: 2px solid rgba(255,255,255,0.3);">
                             <i class="bi bi-globe-americas me-2"></i>Jelajahi Peta Satelit
                         </a>
-                    @else
-                        <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}" class="btn btn-asahan-gold btn-hero ripple">
+                    <?php else: ?>
+                        <a href="<?php echo e(auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard')); ?>" class="btn btn-asahan-gold btn-hero ripple">
                             <i class="bi bi-speedometer2 me-2"></i>Dashboard Saya
                         </a>
                         <a href="#peta-umkm" class="btn btn-hero glass-card ripple" style="color: white; border: 2px solid rgba(255,255,255,0.3);">
                             <i class="bi bi-globe-americas me-2"></i>Jelajahi Peta Satelit
                         </a>
-                    @endguest
+                    <?php endif; ?>
                 </div>
                 
                 <!-- Trust Badges -->
@@ -454,21 +317,21 @@
             <div class="col-md-4">
                 <div class="stats-card">
                     <i class="bi bi-shop stats-icon"></i>
-                    <div class="stats-value counter" data-target="{{ $stats['total_businesses'] ?? 0 }}">{{ $stats['total_businesses'] ?? 0 }}</div>
+                    <div class="stats-value counter" data-target="<?php echo e($stats['total_businesses'] ?? 0); ?>"><?php echo e($stats['total_businesses'] ?? 0); ?></div>
                     <div class="stats-label">Total UMKM Terdaftar</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="stats-card gold">
                     <i class="bi bi-pin-map-fill stats-icon"></i>
-                    <div class="stats-value counter" data-target="{{ $stats['districts'] ?? 0 }}">{{ $stats['districts'] ?? 0 }}</div>
+                    <div class="stats-value counter" data-target="<?php echo e($stats['districts'] ?? 0); ?>"><?php echo e($stats['districts'] ?? 0); ?></div>
                     <div class="stats-label">Kecamatan Terlayani</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="stats-card blue">
                     <i class="bi bi-grid-3x3-gap-fill stats-icon"></i>
-                    <div class="stats-value counter" data-target="{{ $stats['business_types'] ?? 0 }}">{{ $stats['business_types'] ?? 0 }}</div>
+                    <div class="stats-value counter" data-target="<?php echo e($stats['business_types'] ?? 0); ?>"><?php echo e($stats['business_types'] ?? 0); ?></div>
                     <div class="stats-label">Kategori Usaha</div>
                 </div>
             </div>
@@ -594,9 +457,9 @@
                                 <label class="form-label">Kecamatan</label>
                                 <select class="form-select" id="district">
                                     <option value="">Semua Kecamatan</option>
-                                    @foreach($businesses->unique('district')->pluck('district')->filter() as $district)
-                                        <option value="{{ $district }}">{{ $district }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $businesses->unique('district')->pluck('district')->filter(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $district): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($district); ?>"><?php echo e($district); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
@@ -624,22 +487,22 @@
                 <p class="mb-4 fs-5">
                     Daftarkan usaha Anda sekarang dan jadilah bagian dari transformasi digital UMKM Kabupaten Asahan
                 </p>
-                @guest
-                    <a href="{{ route('register') }}" class="btn btn-asahan-gold btn-lg">
+                <?php if(auth()->guard()->guest()): ?>
+                    <a href="<?php echo e(route('register')); ?>" class="btn btn-asahan-gold btn-lg">
                         <i class="bi bi-rocket-takeoff me-2"></i>Mulai Sekarang - Gratis!
                     </a>
-                @else
-                    <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard') }}" class="btn btn-asahan-gold btn-lg">
+                <?php else: ?>
+                    <a href="<?php echo e(auth()->user()->isAdmin() ? route('admin.dashboard') : route('user.dashboard')); ?>" class="btn btn-asahan-gold btn-lg">
                         <i class="bi bi-speedometer2 me-2"></i>Ke Dashboard
                     </a>
-                @endguest
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 $(document).ready(function() {
     // Counter Animation
@@ -769,7 +632,7 @@ $(document).ready(function() {
     
     // Add markers
     let markers = [];
-    const businesses = @json($businesses);
+    const businesses = <?php echo json_encode($businesses, 15, 512) ?>;
     
     businesses.forEach(function(business) {
         if (business.latitude && business.longitude) {
@@ -854,4 +717,6 @@ $(document).ready(function() {
     });
 });
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/umkm/resources/views/home.blade.php ENDPATH**/ ?>
