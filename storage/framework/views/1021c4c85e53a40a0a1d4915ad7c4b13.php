@@ -375,17 +375,124 @@
             transform: scale(1.2);
         }
 
+        /* ============================================ */
+        /* RESPONSIVE DESIGN UNTUK HP */
+        /* ============================================ */
+        
         @media (max-width: 768px) {
             #map {
                 height: 400px;
             }
             
+            /* Header Dinas - Mobile */
+            .main-header {
+                padding: 1rem 0 !important;
+            }
+            
+            .logo-dinas {
+                height: 50px !important;
+                width: auto !important;
+            }
+            
+            .header-text-wrapper h3 {
+                font-size: 0.9rem !important;
+                line-height: 1.3 !important;
+            }
+            
+            .header-text-wrapper h4 {
+                font-size: 0.85rem !important;
+            }
+            
+            .header-text-wrapper .row.g-2 {
+                display: none !important; /* Hide contact info on mobile */
+            }
+            
+            .header-text-wrapper .col-auto div[style*="width: 4px"] {
+                display: none !important; /* Hide separator lines */
+            }
+            
+            /* Navbar - Mobile */
+            .navbar-asahan {
+                padding: 0.5rem 0 !important;
+            }
+            
             .logo-header {
-                height: 30px;
+                height: 30px !important;
             }
             
             .navbar-brand {
-                font-size: 0.9rem;
+                font-size: 0.85rem !important;
+            }
+            
+            .navbar-nav {
+                background: white;
+                padding: 1rem;
+                border-radius: 8px;
+                margin-top: 0.5rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            
+            .nav-link {
+                padding: 0.75rem 1rem !important;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            /* Footer - Mobile */
+            .footer-asahan {
+                padding: 2rem 0 !important;
+            }
+            
+            .footer-asahan h5 {
+                font-size: 1rem !important;
+                margin-top: 1.5rem;
+            }
+            
+            .footer-asahan h5:first-child {
+                margin-top: 0;
+            }
+            
+            .footer-asahan p,
+            .footer-asahan ul li {
+                font-size: 0.85rem !important;
+            }
+            
+            .footer-bottom {
+                padding: 1rem 0 !important;
+                text-align: center !important;
+            }
+            
+            .footer-bottom .row > div {
+                margin-bottom: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-header {
+                padding: 0.75rem 0 !important;
+            }
+            
+            .logo-dinas {
+                height: 40px !important;
+            }
+            
+            .header-text-wrapper h3 {
+                font-size: 0.75rem !important;
+            }
+            
+            .header-text-wrapper h4 {
+                font-size: 0.7rem !important;
+            }
+            
+            .navbar-brand {
+                font-size: 0.75rem !important;
+            }
+            
+            .logo-header {
+                height: 25px !important;
             }
         }
     </style>

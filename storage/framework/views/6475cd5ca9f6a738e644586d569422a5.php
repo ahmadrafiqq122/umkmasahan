@@ -211,21 +211,156 @@
         box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
     
+    /* ============================================ */
+    /* RESPONSIVE DESIGN UNTUK HP - DIPERBAIKI */
+    /* ============================================ */
+    
+    /* HP Kecil dan Sedang (max 768px) */
     @media (max-width: 768px) {
+        .hero-asahan {
+            padding: 4rem 0 3rem !important;
+            min-height: auto !important;
+        }
+        
+        .hero-badge {
+            font-size: 0.8rem !important;
+            padding: 0.5rem 1rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
         .hero-title {
-            font-size: 2rem;
+            font-size: 2rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .hero-title .highlight {
+            font-size: 2.5rem !important;
         }
         
         .hero-subtitle {
-            font-size: 1rem;
+            font-size: 1rem !important;
+            margin-bottom: 1.5rem !important;
+            line-height: 1.6 !important;
+        }
+        
+        .hero-3d-icon {
+            font-size: 8rem !important;
+        }
+        
+        .btn-hero {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 1rem !important;
+            width: 100% !important;
+            margin-bottom: 0.75rem !important;
         }
         
         .stats-card {
-            margin-bottom: 1rem;
+            margin-bottom: 1rem !important;
+            padding: 1.5rem 1rem !important;
+        }
+        
+        .stats-value {
+            font-size: 2rem !important;
+        }
+        
+        .stats-label {
+            font-size: 0.9rem !important;
+        }
+        
+        .stats-icon {
+            font-size: 2rem !important;
+        }
+        
+        .feature-card {
+            padding: 1.5rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .feature-icon {
+            width: 60px !important;
+            height: 60px !important;
+            font-size: 1.5rem !important;
         }
         
         .map-container {
-            height: 400px;
+            height: 400px !important;
+        }
+        
+        /* Section spacing lebih kecil */
+        .container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        section {
+            padding: 3rem 0 !important;
+        }
+        
+        h2 {
+            font-size: 1.75rem !important;
+        }
+        
+        .search-card {
+            padding: 1.5rem !important;
+        }
+        
+        .form-control, .form-select {
+            font-size: 16px !important; /* Prevent zoom on iOS */
+        }
+    }
+    
+    /* HP Sangat Kecil (max 576px) */
+    @media (max-width: 576px) {
+        .hero-asahan {
+            padding: 3rem 0 2rem !important;
+        }
+        
+        .hero-title {
+            font-size: 1.75rem !important;
+        }
+        
+        .hero-title .highlight {
+            font-size: 2rem !important;
+        }
+        
+        .hero-subtitle {
+            font-size: 0.95rem !important;
+        }
+        
+        .hero-badge {
+            font-size: 0.75rem !important;
+        }
+        
+        .stats-value {
+            font-size: 1.75rem !important;
+        }
+        
+        .stats-label {
+            font-size: 0.85rem !important;
+        }
+        
+        h2 {
+            font-size: 1.5rem !important;
+        }
+        
+        .map-container {
+            height: 350px !important;
+        }
+    }
+    
+    /* Landscape mode untuk HP */
+    @media (max-width: 768px) and (orientation: landscape) {
+        .hero-asahan {
+            min-height: auto !important;
+            padding: 2rem 0 !important;
+        }
+        
+        .hero-3d-icon {
+            font-size: 6rem !important;
+        }
+        
+        .map-container {
+            height: 300px !important;
         }
     }
 </style>

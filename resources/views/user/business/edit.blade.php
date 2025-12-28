@@ -477,8 +477,8 @@
                 <div class="map-instruction">
                     <i class="bi bi-cursor-fill"></i>
                     <div>
-                        <strong>Klik pada peta untuk mengubah lokasi usaha Anda</strong>
-                        <br><small>Gunakan layer control di kanan atas untuk mengganti tampilan peta (Satelit/Jalan)</small>
+                        <strong>Klik pada peta satelit untuk mengubah lokasi usaha Anda</strong>
+                        <br><small>Zoom in/out untuk melihat lokasi dengan lebih detail</small>
                     </div>
                 </div>
                 
@@ -661,85 +661,22 @@
     }).addTo(map);
     
     // ============================================
-    // BASE LAYERS (Background Map)
+    // GOOGLE SATELLITE ONLY - Simple & Clean
     // ============================================
     
-    // 1. Street Map Layer (OpenStreetMap)
-    const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        maxNativeZoom: 19,
-        attribution: '© OpenStreetMap contributors'
-    });
-    
-    // 2. Google Satellite (Recommended)
-    const googleSatellite = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    // Google Satellite dengan Labels
+    L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
         maxZoom: 20,
         maxNativeZoom: 20,
-        attribution: '© Google'
-    });
-    
-    // 3. Esri Satellite (backup)
-    const esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 18,
-        maxNativeZoom: 18,
-        attribution: '© Esri'
-    });
-    
-    // ============================================
-    // LABEL LAYERS (Detail Jalan + Tempat)
-    // ============================================
-    
-    // 4. Google Hybrid Labels
-    const googleLabels = L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        maxNativeZoom: 20,
-        attribution: '© Google'
-    });
-    
-    // 5. OpenStreetMap Labels
-    const osmLabels = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        maxNativeZoom: 19,
-        opacity: 0.5,
-        attribution: '© OpenStreetMap'
-    });
-    
-    // ============================================
-    // SET DEFAULT: GOOGLE SATELLITE + LABELS
-    // ============================================
-    googleSatellite.addTo(map);
-    googleLabels.addTo(map);
-    
-    // ============================================
-    // LAYER CONTROL
-    // ============================================
-    const baseMaps = {
-        "<i class='bi bi-globe-americas me-1'></i> <strong>Satelit Google (Recommended)</strong>": googleSatellite,
-        "<i class='bi bi-satellite me-1'></i> Satelit Esri": esriSatellite,
-        "<i class='bi bi-map-fill me-1'></i> Peta Jalan": streetLayer
-    };
-    
-    const overlayMaps = {
-        "<i class='bi bi-signpost-fill me-1'></i> <strong>Label Lengkap (Jalan + Tempat)</strong>": googleLabels,
-        "<i class='bi bi-geo-alt-fill me-1'></i> Label OSM Tambahan": osmLabels
-    };
-    
-    const layerControl = L.control.layers(baseMaps, overlayMaps, {
-        position: 'topright',
-        collapsed: false
+        attribution: '© Google Satellite'
     }).addTo(map);
     
-    // Style layer control
-    setTimeout(() => {
-        const layerControlDiv = document.querySelector('.leaflet-control-layers');
-        if (layerControlDiv) {
-            layerControlDiv.style.background = 'rgba(255, 255, 255, 0.95)';
-            layerControlDiv.style.backdropFilter = 'blur(10px)';
-            layerControlDiv.style.borderRadius = '12px';
-            layerControlDiv.style.padding = '15px';
-            layerControlDiv.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
-        }
-    }, 100);
+    // Google Labels (Jalan + Tempat)
+    L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        maxNativeZoom: 20,
+        attribution: ''
+    }).addTo(map);
     
     // Custom marker icon for user's business location
     const userIcon = L.divIcon({
