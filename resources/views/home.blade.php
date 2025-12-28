@@ -53,6 +53,11 @@
     #map {
         height: 500px;
         border-radius: 8px;
+        background: #e5e3df; /* OSM tile color saat loading */
+    }
+    
+    .leaflet-tile-container {
+        transition: opacity 0.2s;
     }
     
     @media (max-width: 768px) {
@@ -234,10 +239,13 @@ $(document).ready(function() {
     const map = L.map('map').setView([2.9833, 99.6167], 11);
     console.log('Map initialized:', map);
     
-    // OpenStreetMap - Clean tanpa label usaha bawaan
+    // OpenStreetMap dengan multiple servers untuk reliability
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '© OpenStreetMap contributors'
+        attribution: '© OpenStreetMap',
+        subdomains: ['a', 'b', 'c'],
+        errorTileUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+        crossOrigin: true
     }).addTo(map);
     
     // Custom icon function - Google Maps style dengan label nama
