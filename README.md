@@ -53,9 +53,7 @@ php artisan storage:link
 php artisan serve
 ```
 
-### Default Admin
-- Email: admin@disperindagkop.asahan.go.id
-- Password: Admin123!
+
 
 ### Struktur Database
 - users (Admin & Pelaku Usaha)
@@ -64,4 +62,4 @@ php artisan serve
 - verification_codes (Kode Verifikasi Email)
 
 ### Developer
-Dikembangkan untuk Dinas Koperasi Perdagangan dan Perindustrian Kabupaten Asahan
+AHMAD RAFIQ
