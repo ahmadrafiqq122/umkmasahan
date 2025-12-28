@@ -343,7 +343,6 @@ $(document).ready(function() {
                 
                 marker.bindPopup(`
                     <div style="min-width: 220px;">
-                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${getBusinessIcon(business.business_type).options.html.match(/>(.*?)</)[1]}</div>
                         <h6 class="mb-2"><strong>${business.business_name}</strong></h6>
                         <p class="mb-1"><small><i class="bi bi-tag"></i> ${business.business_type.toUpperCase()}</small></p>
                         <p class="mb-1"><small><i class="bi bi-geo-alt"></i> ${business.address}</small></p>
