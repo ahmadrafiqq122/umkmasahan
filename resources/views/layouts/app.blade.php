@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <!-- Dinas Template CSS -->
-    <link rel="stylesheet" href="{{ asset('css/dinas-template.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dinas-template.css') }}?v={{ time() }}">
     
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
