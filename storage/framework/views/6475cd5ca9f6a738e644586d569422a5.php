@@ -676,85 +676,22 @@ $(document).ready(function() {
     }).addTo(map);
     
     // ============================================
-    // BASE LAYERS (Background Map)
+    // GOOGLE SATELLITE ONLY - Simple & Clean
     // ============================================
     
-    // 1. Street Map Layer (OpenStreetMap) - Support sampai zoom 19
-    const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        maxNativeZoom: 19,
-        attribution: '© OpenStreetMap contributors'
-    });
-    
-    // 2. Google Satellite (via third party) - Lebih stabil untuk zoom tinggi
-    const googleSatellite = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    // Google Satellite dengan Labels
+    L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
         maxZoom: 20,
         maxNativeZoom: 20,
-        attribution: '© Google'
-    });
-    
-    // 3. Esri Satellite (backup)
-    const esriSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 18,
-        maxNativeZoom: 18,
-        attribution: '© Esri'
-    });
-    
-    // ============================================
-    // LABEL LAYERS (Semua Detail)
-    // ============================================
-    
-    // 4. Google Hybrid Labels (Jalan + Tempat)
-    const googleLabels = L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        maxNativeZoom: 20,
-        attribution: '© Google'
-    });
-    
-    // 5. OpenStreetMap Labels with boundaries
-    const osmLabels = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        maxNativeZoom: 19,
-        opacity: 0.5,
-        attribution: '© OpenStreetMap'
-    });
-    
-    // ============================================
-    // SET DEFAULT: GOOGLE SATELLITE + LABELS (Paling Stabil)
-    // ============================================
-    googleSatellite.addTo(map);
-    googleLabels.addTo(map);
-    
-    // ============================================
-    // LAYER CONTROL - Bisa Toggle ON/OFF
-    // ============================================
-    const baseMaps = {
-        "<i class='bi bi-globe-americas me-1'></i> <strong>Satelit Google (Recommended)</strong>": googleSatellite,
-        "<i class='bi bi-satellite me-1'></i> Satelit Esri": esriSatellite,
-        "<i class='bi bi-map-fill me-1'></i> Peta Jalan": streetLayer
-    };
-    
-    const overlayMaps = {
-        "<i class='bi bi-signpost-fill me-1'></i> <strong>Label Lengkap (Jalan + Tempat)</strong>": googleLabels,
-        "<i class='bi bi-geo-alt-fill me-1'></i> Label OSM Tambahan": osmLabels
-    };
-    
-    const layerControl = L.control.layers(baseMaps, overlayMaps, {
-        position: 'topright',
-        collapsed: false
+        attribution: '© Google Satellite'
     }).addTo(map);
     
-    // Add custom styling to layer control
-    setTimeout(() => {
-        const layerControlDiv = document.querySelector('.leaflet-control-layers');
-        if (layerControlDiv) {
-            layerControlDiv.style.background = 'rgba(255, 255, 255, 0.95)';
-            layerControlDiv.style.backdropFilter = 'blur(10px)';
-            layerControlDiv.style.borderRadius = '12px';
-            layerControlDiv.style.padding = '15px';
-            layerControlDiv.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
-        }
-    }, 100);
+    // Google Labels (Jalan + Tempat)
+    L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        maxNativeZoom: 20,
+        attribution: ''
+    }).addTo(map);
     
     // Custom marker icon
     const greenIcon = L.divIcon({
