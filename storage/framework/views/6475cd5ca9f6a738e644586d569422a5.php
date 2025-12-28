@@ -4,16 +4,11 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/modern-animations.css')); ?>">
 <style>
     .hero-asahan {
-        background: linear-gradient(135deg, #0d2818 0%, #1a4d2e 50%, #2d6a4f 100%);
-        background-size: 200% 200%;
-        animation: gradientShift 15s ease infinite;
+        background: linear-gradient(135deg, #1a4d2e 0%, #2d6a4f 100%);
         color: white;
-        padding: 6rem 0 5rem;
+        padding: 4rem 0 3rem;
         position: relative;
         overflow: hidden;
-        min-height: 90vh;
-        display: flex;
-        align-items: center;
     }
     
     .hero-asahan::before {
@@ -68,30 +63,23 @@
     }
     
     .hero-title {
-        font-size: 3.5rem;
-        font-weight: 900;
-        margin-bottom: 1.5rem;
-        line-height: 1.2;
-        animation: slideInLeft 1s ease-out;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        letter-spacing: -1px;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
     
     .hero-title .highlight {
-        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-size: 4rem;
+        color: #FFD700;
+        font-weight: 800;
     }
     
     .hero-subtitle {
-        font-size: 1.3rem;
-        margin-bottom: 2.5rem;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
         opacity: 0.95;
-        line-height: 1.8;
-        animation: slideInLeft 1.2s ease-out;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        line-height: 1.6;
     }
     
     .hero-illustration {
@@ -211,156 +199,100 @@
         box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
     
-    /* ============================================ */
-    /* RESPONSIVE DESIGN UNTUK HP - DIPERBAIKI */
-    /* ============================================ */
+    /* ========================================== */
+    /* RESPONSIVE - PROFESSIONAL & BALANCED */
+    /* ========================================== */
     
-    /* HP Kecil dan Sedang (max 768px) */
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
+        /* Tablet */
         .hero-asahan {
-            padding: 4rem 0 3rem !important;
-            min-height: auto !important;
-        }
-        
-        .hero-badge {
-            font-size: 0.8rem !important;
-            padding: 0.5rem 1rem !important;
-            margin-bottom: 1rem !important;
+            padding: 3rem 0 2rem;
         }
         
         .hero-title {
-            font-size: 2rem !important;
-            margin-bottom: 1rem !important;
-        }
-        
-        .hero-title .highlight {
-            font-size: 2.5rem !important;
+            font-size: 2rem;
         }
         
         .hero-subtitle {
-            font-size: 1rem !important;
-            margin-bottom: 1.5rem !important;
-            line-height: 1.6 !important;
+            font-size: 1rem;
         }
         
         .hero-3d-icon {
-            font-size: 8rem !important;
+            font-size: 12rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        /* Mobile */
+        .hero-asahan {
+            padding: 2.5rem 0 2rem;
+        }
+        
+        .hero-title {
+            font-size: 1.75rem;
+        }
+        
+        .hero-title .highlight {
+            display: block;
+            font-size: 2rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 0.95rem;
+        }
+        
+        .hero-badge {
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+        }
+        
+        .hero-3d-icon {
+            font-size: 8rem;
         }
         
         .btn-hero {
-            padding: 0.75rem 1.5rem !important;
-            font-size: 1rem !important;
-            width: 100% !important;
-            margin-bottom: 0.75rem !important;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
         }
         
         .stats-card {
-            margin-bottom: 1rem !important;
-            padding: 1.5rem 1rem !important;
+            margin-bottom: 1rem;
         }
         
         .stats-value {
-            font-size: 2rem !important;
-        }
-        
-        .stats-label {
-            font-size: 0.9rem !important;
-        }
-        
-        .stats-icon {
-            font-size: 2rem !important;
+            font-size: 2rem;
         }
         
         .feature-card {
-            padding: 1.5rem !important;
-            margin-bottom: 1rem !important;
-        }
-        
-        .feature-icon {
-            width: 60px !important;
-            height: 60px !important;
-            font-size: 1.5rem !important;
+            margin-bottom: 1rem;
         }
         
         .map-container {
-            height: 400px !important;
-        }
-        
-        /* Section spacing lebih kecil */
-        .container {
-            padding-left: 1rem !important;
-            padding-right: 1rem !important;
-        }
-        
-        section {
-            padding: 3rem 0 !important;
-        }
-        
-        h2 {
-            font-size: 1.75rem !important;
-        }
-        
-        .search-card {
-            padding: 1.5rem !important;
-        }
-        
-        .form-control, .form-select {
-            font-size: 16px !important; /* Prevent zoom on iOS */
+            height: 400px;
         }
     }
     
-    /* HP Sangat Kecil (max 576px) */
     @media (max-width: 576px) {
-        .hero-asahan {
-            padding: 3rem 0 2rem !important;
-        }
-        
+        /* Small Mobile */
         .hero-title {
-            font-size: 1.75rem !important;
+            font-size: 1.5rem;
         }
         
         .hero-title .highlight {
-            font-size: 2rem !important;
+            font-size: 1.75rem;
         }
         
         .hero-subtitle {
-            font-size: 0.95rem !important;
+            font-size: 0.9rem;
         }
         
-        .hero-badge {
-            font-size: 0.75rem !important;
-        }
-        
-        .stats-value {
-            font-size: 1.75rem !important;
-        }
-        
-        .stats-label {
-            font-size: 0.85rem !important;
-        }
-        
-        h2 {
-            font-size: 1.5rem !important;
+        .btn-hero {
+            padding: 0.7rem 1.25rem;
+            font-size: 0.95rem;
         }
         
         .map-container {
-            height: 350px !important;
-        }
-    }
-    
-    /* Landscape mode untuk HP */
-    @media (max-width: 768px) and (orientation: landscape) {
-        .hero-asahan {
-            min-height: auto !important;
-            padding: 2rem 0 !important;
-        }
-        
-        .hero-3d-icon {
-            font-size: 6rem !important;
-        }
-        
-        .map-container {
-            height: 300px !important;
+            height: 350px;
         }
     }
 </style>

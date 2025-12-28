@@ -1,0 +1,229 @@
+/* ============================================ */
+/* THEME CONSISTENCY FIX - Asahan UMKM */
+/* Warna konsisten & readable di semua device */
+/* ============================================ */
+
+:root {
+    --asahan-green: #2D5F3F;
+    --asahan-green-light: #3d7a52;
+    --asahan-green-dark: #1a4d2e;
+    --asahan-gold: #F4C430;
+    --asahan-gold-dark: #d4a520;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --text-light: #ffffff;
+}
+
+/* ============================================ */
+/* BUTTONS - Consistent & Readable */
+/* ============================================ */
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--asahan-green) 0%, var(--asahan-green-light) 100%) !important;
+    border: none !important;
+    color: var(--text-light) !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--asahan-green-dark) 0%, var(--asahan-green) 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(45, 95, 63, 0.3) !important;
+}
+
+.btn-success {
+    background: var(--asahan-green) !important;
+    border-color: var(--asahan-green) !important;
+    color: var(--text-light) !important;
+}
+
+.btn-success:hover {
+    background: var(--asahan-green-dark) !important;
+    border-color: var(--asahan-green-dark) !important;
+}
+
+.btn-warning {
+    background: var(--asahan-gold) !important;
+    border-color: var(--asahan-gold) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+
+.btn-warning:hover {
+    background: var(--asahan-gold-dark) !important;
+    border-color: var(--asahan-gold-dark) !important;
+}
+
+/* ============================================ */
+/* LINKS - Readable & Consistent */
+/* ============================================ */
+
+a {
+    color: var(--asahan-green);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--asahan-green-dark);
+    text-decoration: underline;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--asahan-gold) !important;
+}
+
+/* ============================================ */
+/* BADGES & TAGS */
+/* ============================================ */
+
+.badge-success,
+.badge.bg-success {
+    background: var(--asahan-green) !important;
+    color: var(--text-light) !important;
+}
+
+.badge-warning,
+.badge.bg-warning {
+    background: var(--asahan-gold) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================ */
+/* ALERTS - Readable */
+/* ============================================ */
+
+.alert-success {
+    background-color: rgba(45, 95, 63, 0.1) !important;
+    border-color: var(--asahan-green) !important;
+    color: var(--asahan-green-dark) !important;
+}
+
+.alert-info {
+    background-color: rgba(13, 110, 253, 0.1) !important;
+    border-color: #0d6efd !important;
+    color: #084298 !important;
+}
+
+.alert-warning {
+    background-color: rgba(244, 196, 48, 0.15) !important;
+    border-color: var(--asahan-gold) !important;
+    color: #856404 !important;
+}
+
+/* ============================================ */
+/* FORM ELEMENTS - Consistent & Clear */
+/* ============================================ */
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--asahan-green) !important;
+    box-shadow: 0 0 0 0.25rem rgba(45, 95, 63, 0.15) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--asahan-green) !important;
+    border-color: var(--asahan-green) !important;
+}
+
+/* ============================================ */
+/* TEXT COLORS - Readable */
+/* ============================================ */
+
+.text-primary {
+    color: var(--text-primary) !important;
+}
+
+.text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Make sure text is readable on colored backgrounds */
+.bg-success,
+.bg-primary,
+.bg-dark {
+    color: var(--text-light) !important;
+}
+
+.bg-warning,
+.bg-light {
+    color: var(--text-primary) !important;
+}
+
+/* ============================================ */
+/* SWAL (SweetAlert) - Consistent Colors */
+/* ============================================ */
+
+.swal2-confirm {
+    background-color: var(--asahan-green) !important;
+}
+
+.swal2-cancel {
+    background-color: #6c757d !important;
+}
+
+/* ============================================ */
+/* MOBILE SPECIFIC - Touch-friendly */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    /* Buttons lebih besar di mobile */
+    .btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+    }
+    
+    /* Links lebih mudah tap */
+    a {
+        padding: 0.25rem 0;
+        display: inline-block;
+    }
+    
+    /* Form inputs lebih besar */
+    .form-control,
+    .form-select {
+        font-size: 16px; /* Prevent zoom on iOS */
+        padding: 0.75rem;
+    }
+}
+
+/* ============================================ */
+/* CONTRAST FIX - Ensure readability */
+/* ============================================ */
+
+/* Dark text on light background */
+.card-body,
+.modal-body,
+.table {
+    color: var(--text-primary);
+}
+
+/* Light text on dark background */
+.navbar-dark,
+.footer-dark,
+.bg-dark {
+    color: var(--text-light) !important;
+}
+
+/* Ensure sufficient contrast for all text */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+.hero-asahan h1,
+.hero-asahan h2,
+.hero-asahan h3,
+.hero-asahan p {
+    color: var(--text-light) !important;
+}

@@ -485,31 +485,78 @@ $(document).ready(function() {
         }
     });
     
-    // Countdown timer for resend button
-    let timeLeft = 60;
+    // ============================================
+    // TIMER RESEND CODE - PERSISTENT (Tidak Reset Saat Refresh)
+    // ============================================
+    
     const resendBtn = $('#resendBtn');
     const timerElement = $('#timer');
+    let countdownInterval;
     
-    const countdown = setInterval(function() {
-        timeLeft--;
+    // Get timer dari localStorage atau set default 60
+    function getTimeLeft() {
+        const savedTime = localStorage.getItem('resend_timer_end');
+        if (savedTime) {
+            const timeLeft = Math.max(0, Math.floor((parseInt(savedTime) - Date.now()) / 1000));
+            if (timeLeft > 0) {
+                return timeLeft;
+            }
+        }
+        return 60;
+    }
+    
+    // Save timer end time ke localStorage
+    function saveTimerEnd(seconds) {
+        const endTime = Date.now() + (seconds * 1000);
+        localStorage.setItem('resend_timer_end', endTime);
+    }
+    
+    // Start countdown
+    function startCountdown(initialTime) {
+        let timeLeft = initialTime;
         timerElement.text(timeLeft);
+        resendBtn.prop('disabled', true);
+        timerElement.parent().show();
         
-        if (timeLeft <= 0) {
-            clearInterval(countdown);
-            resendBtn.prop('disabled', false);
-            resendBtn.html('<i class="bi bi-arrow-clockwise me-2"></i>Kirim Ulang Kode');
+        if (initialTime > 0) {
+            saveTimerEnd(initialTime);
         }
-    }, 1000);
+        
+        // Clear existing interval
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        
+        countdownInterval = setInterval(function() {
+            timeLeft--;
+            timerElement.text(timeLeft);
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                resendBtn.prop('disabled', false);
+                resendBtn.html('<i class="bi bi-arrow-clockwise me-2"></i>Kirim Ulang Kode');
+                timerElement.parent().hide();
+                localStorage.removeItem('resend_timer_end');
+            }
+        }, 1000);
+    }
     
-    // Resend code
+    // Initialize timer saat page load (cek localStorage)
+    const initialTime = getTimeLeft();
+    if (initialTime > 0) {
+        startCountdown(initialTime);
+    } else {
+        resendBtn.prop('disabled', false);
+        resendBtn.html('<i class="bi bi-arrow-clockwise me-2"></i>Kirim Ulang Kode');
+        timerElement.parent().hide();
+    }
+    
+    // Resend button click handler
     resendBtn.click(function() {
-        if (timeLeft > 0) {
-            return;
-        }
+        if ($(this).prop('disabled')) return;
         
-        if ($(this).prop('disabled')) {
-            return;
-        }
+        $(this).prop('disabled', true);
+        $(this).html('<i class="bi bi-hourglass-split me-2"></i>Mengirim...');
         
         $.ajax({
             url: '{{ route("verification.resend") }}',
@@ -522,33 +569,30 @@ $(document).ready(function() {
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil!',
-                    text: 'Kode verifikasi baru telah dikirim',
+                    text: 'Kode verifikasi baru telah dikirim ke email Anda',
                     timer: 3000,
-                    showConfirmButton: false
+                    showConfirmButton: false,
+                    confirmButtonColor: '#2D5F3F'
                 });
                 
-                // Reset timer
-                timeLeft = 60;
-                resendBtn.prop('disabled', true);
-                timerElement.parent().show();
-                
-                const newCountdown = setInterval(function() {
-                    timeLeft--;
-                    timerElement.text(timeLeft);
-                    
-                    if (timeLeft <= 0) {
-                        clearInterval(newCountdown);
-                        resendBtn.prop('disabled', false);
-                        resendBtn.html('<i class="bi bi-arrow-clockwise me-2"></i>Kirim Ulang Kode');
-                    }
-                }, 1000);
+                // Start new countdown
+                startCountdown(60);
             },
-            error: function() {
+            error: function(xhr) {
+                let errorMsg = 'Terjadi kesalahan, silakan coba lagi';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMsg = xhr.responseJSON.message;
+                }
+                
                 Swal.fire({
                     icon: 'error',
                     title: 'Gagal!',
-                    text: 'Terjadi kesalahan, silakan coba lagi'
+                    text: errorMsg,
+                    confirmButtonColor: '#2D5F3F'
                 });
+                
+                resendBtn.prop('disabled', false);
+                resendBtn.html('<i class="bi bi-arrow-clockwise me-2"></i>Kirim Ulang Kode');
             }
         });
     });

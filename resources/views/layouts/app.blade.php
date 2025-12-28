@@ -21,6 +21,9 @@
     <!-- Asahan Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/asahan-theme.css') }}">
     
+    <!-- Theme Consistency Fix -->
+    <link rel="stylesheet" href="{{ asset('css/theme-fix.css') }}">
+    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     

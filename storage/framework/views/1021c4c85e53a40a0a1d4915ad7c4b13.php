@@ -21,6 +21,9 @@
     <!-- Asahan Theme CSS -->
     <link rel="stylesheet" href="<?php echo e(asset('css/asahan-theme.css')); ?>">
     
+    <!-- Theme Consistency Fix -->
+    <link rel="stylesheet" href="<?php echo e(asset('css/theme-fix.css')); ?>">
+    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     
@@ -375,53 +378,62 @@
             transform: scale(1.2);
         }
 
-        /* ============================================ */
-        /* RESPONSIVE DESIGN UNTUK HP */
-        /* ============================================ */
+        /* ========================================== */
+        /* RESPONSIVE - PROFESSIONAL & BALANCED */
+        /* ========================================== */
         
-        @media (max-width: 768px) {
-            #map {
-                height: 400px;
-            }
-            
-            /* Header Dinas - Mobile */
+        @media (max-width: 991px) {
+            /* Tablet & Mobile */
             .main-header {
-                padding: 1rem 0 !important;
+                padding: 1rem 0;
             }
             
             .logo-dinas {
-                height: 50px !important;
-                width: auto !important;
+                height: 55px;
             }
             
             .header-text-wrapper h3 {
-                font-size: 0.9rem !important;
-                line-height: 1.3 !important;
+                font-size: 1rem;
+                line-height: 1.3;
             }
             
             .header-text-wrapper h4 {
-                font-size: 0.85rem !important;
+                font-size: 0.95rem;
             }
             
             .header-text-wrapper .row.g-2 {
-                display: none !important; /* Hide contact info on mobile */
+                display: none; /* Hide contact on tablet/mobile */
             }
             
             .header-text-wrapper .col-auto div[style*="width: 4px"] {
-                display: none !important; /* Hide separator lines */
+                display: none; /* Hide separator */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            /* Mobile Landscape & Portrait */
+            .main-header {
+                padding: 0.75rem 0;
             }
             
-            /* Navbar - Mobile */
-            .navbar-asahan {
-                padding: 0.5rem 0 !important;
+            .logo-dinas {
+                height: 45px;
             }
             
-            .logo-header {
-                height: 30px !important;
+            .header-text-wrapper h3 {
+                font-size: 0.85rem;
+            }
+            
+            .header-text-wrapper h4 {
+                font-size: 0.8rem;
             }
             
             .navbar-brand {
-                font-size: 0.85rem !important;
+                font-size: 0.9rem;
+            }
+            
+            .logo-header {
+                height: 30px;
             }
             
             .navbar-nav {
@@ -433,7 +445,7 @@
             }
             
             .nav-link {
-                padding: 0.75rem 1rem !important;
+                padding: 0.75rem 1rem;
                 border-bottom: 1px solid #e9ecef;
             }
             
@@ -441,13 +453,12 @@
                 border-bottom: none;
             }
             
-            /* Footer - Mobile */
             .footer-asahan {
-                padding: 2rem 0 !important;
+                padding: 2rem 0;
             }
             
             .footer-asahan h5 {
-                font-size: 1rem !important;
+                font-size: 1.1rem;
                 margin-top: 1.5rem;
             }
             
@@ -455,44 +466,8 @@
                 margin-top: 0;
             }
             
-            .footer-asahan p,
-            .footer-asahan ul li {
-                font-size: 0.85rem !important;
-            }
-            
-            .footer-bottom {
-                padding: 1rem 0 !important;
-                text-align: center !important;
-            }
-            
-            .footer-bottom .row > div {
-                margin-bottom: 0.5rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .main-header {
-                padding: 0.75rem 0 !important;
-            }
-            
-            .logo-dinas {
-                height: 40px !important;
-            }
-            
-            .header-text-wrapper h3 {
-                font-size: 0.75rem !important;
-            }
-            
-            .header-text-wrapper h4 {
-                font-size: 0.7rem !important;
-            }
-            
-            .navbar-brand {
-                font-size: 0.75rem !important;
-            }
-            
-            .logo-header {
-                height: 25px !important;
+            #map {
+                height: 400px;
             }
         }
     </style>
