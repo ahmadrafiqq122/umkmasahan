@@ -81,6 +81,32 @@ h6 { font-size: 1rem; }
     margin: 0;
 }
 
+/* Hide logo text column on very small screens */
+@media (max-width: 576px) {
+    .header-dinas {
+        padding: 0.75rem 0;
+    }
+    
+    .header-dinas .row {
+        text-align: center;
+    }
+    
+    .header-dinas .logo {
+        height: 50px;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    .header-dinas .title {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+    }
+    
+    .header-dinas .subtitle {
+        font-size: 0.75rem;
+    }
+}
+
 /* ============================================ */
 /* NAVBAR */
 /* ============================================ */
@@ -272,15 +298,16 @@ h6 { font-size: 1rem; }
     h3 { font-size: 1.2rem; }
     
     .header-dinas .logo {
-        height: 45px;
+        height: 55px;
     }
     
     .header-dinas .title {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
+        line-height: 1.2;
     }
     
     .header-dinas .subtitle {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
     
     .navbar-dinas .nav-link {

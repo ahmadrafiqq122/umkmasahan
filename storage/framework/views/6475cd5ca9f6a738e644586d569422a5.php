@@ -198,7 +198,7 @@ $(document).ready(function() {
                             <h6 class="mb-2"><strong>${business.business_name}</strong></h6>
                             <p class="mb-1"><small><i class="bi bi-geo-alt"></i> ${business.address}</small></p>
                             <p class="mb-1"><small><i class="bi bi-tag"></i> ${business.business_type}</small></p>
-                            <a href="/businesses/${business.id}" class="btn btn-sm btn-primary mt-2">Detail</a>
+                            <a href="/business/${business.id}" class="btn btn-sm btn-primary mt-2">Detail</a>
                         </div>
                     `);
                     
