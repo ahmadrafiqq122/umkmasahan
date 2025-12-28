@@ -237,10 +237,12 @@ $(document).ready(function() {
     const map = L.map('map').setView([2.9833, 99.6167], 11);
     console.log('Map initialized:', map);
     
-    // OpenStreetMap - No label conflicts
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
+    // Google Maps Roadmap tanpa label usaha (hanya jalan)
+    L.tileLayer('https://mt{s}.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        maxNativeZoom: 20,
+        subdomains: ['0', '1', '2', '3'],
+        attribution: '© Google Maps'
     }).addTo(map);
     
     // Custom icon function - BESAR & TERANG untuk OSM
