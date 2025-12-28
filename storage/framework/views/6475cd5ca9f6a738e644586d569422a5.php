@@ -224,16 +224,10 @@ $(document).ready(function() {
     // Initialize map
     const map = L.map('map').setView([2.9833, 99.6167], 11);
     
-    // Google Satellite
-    L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        attribution: '© Google'
-    }).addTo(map);
-    
-    // Google Labels
-    L.tileLayer('https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        attribution: ''
+    // OpenStreetMap - Clean tanpa label usaha bawaan
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
     }).addTo(map);
     
     // Custom icon function - Google Maps style

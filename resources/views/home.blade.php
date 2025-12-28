@@ -232,7 +232,7 @@ $(document).ready(function() {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
     
-    // Custom icon function - Google Maps style
+    // Custom icon function - Google Maps style dengan label nama
     function getBusinessIcon(type, businessName) {
         const config = {
             'kuliner': { icon: '🍽️', color: '#EA4335' },      // Merah
@@ -247,27 +247,45 @@ $(document).ready(function() {
         
         const item = config[type] || { icon: '📍', color: '#2D5F3F' };
         
+        // Truncate nama jika terlalu panjang
+        const displayName = businessName.length > 18 ? businessName.substring(0, 18) + '...' : businessName;
+        
         return L.divIcon({
             html: `
-                <div style="
-                    background: ${item.color};
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 3px solid white;
-                    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-                    cursor: pointer;
-                    transition: transform 0.2s;
-                ">
-                    <span style="font-size: 1.3rem;">${item.icon}</span>
+                <div style="text-align: center; position: relative;">
+                    <div style="
+                        background: ${item.color};
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: 3px solid white;
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                        margin: 0 auto;
+                    ">
+                        <span style="font-size: 1.3rem;">${item.icon}</span>
+                    </div>
+                    <div style="
+                        background: white;
+                        color: #333;
+                        padding: 2px 6px;
+                        border-radius: 3px;
+                        font-size: 0.7rem;
+                        font-weight: 600;
+                        white-space: nowrap;
+                        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+                        margin-top: 3px;
+                        border: 1px solid #ddd;
+                    ">${displayName}</div>
                 </div>
             `,
-            className: 'marker-icon',
-            iconSize: [36, 36],
-            iconAnchor: [18, 18],
+            className: 'marker-with-label',
+            iconSize: [100, 60],
+            iconAnchor: [50, 18],
             popupAnchor: [0, -18]
         });
     }
