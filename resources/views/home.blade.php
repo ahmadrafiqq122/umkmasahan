@@ -131,8 +131,59 @@
 <!-- Map -->
 <section class="container my-4">
     <div class="map-section">
-        <h2 class="mb-3">Peta Sebaran UMKM</h2>
+        <div class="row align-items-center mb-3">
+            <div class="col-md-4">
+                <h2 class="mb-0">Peta Sebaran UMKM</h2>
+            </div>
+            <div class="col-md-8">
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <input type="text" id="searchBusiness" class="form-control" placeholder="🔍 Cari nama usaha...">
+                    </div>
+                    <div class="col-md-4">
+                        <select id="filterKecamatan" class="form-select">
+                            <option value="">📍 Semua Kecamatan</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="filterJenisUsaha" class="form-select">
+                            <option value="">🏪 Semua Jenis Usaha</option>
+                            <option value="kuliner">🍽️ Kuliner</option>
+                            <option value="fashion">👕 Fashion</option>
+                            <option value="kerajinan">🎨 Kerajinan</option>
+                            <option value="pertanian">🌾 Pertanian</option>
+                            <option value="perikanan">🐟 Perikanan</option>
+                            <option value="jasa">⚙️ Jasa</option>
+                            <option value="perdagangan">🏬 Perdagangan</option>
+                            <option value="lainnya">📦 Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="d-flex flex-wrap gap-3 align-items-center small">
+                    <strong>Legenda:</strong>
+                    <span><span style="font-size: 1.5rem;">🍽️</span> Kuliner</span>
+                    <span><span style="font-size: 1.5rem;">👕</span> Fashion</span>
+                    <span><span style="font-size: 1.5rem;">🎨</span> Kerajinan</span>
+                    <span><span style="font-size: 1.5rem;">🌾</span> Pertanian</span>
+                    <span><span style="font-size: 1.5rem;">🐟</span> Perikanan</span>
+                    <span><span style="font-size: 1.5rem;">⚙️</span> Jasa</span>
+                    <span><span style="font-size: 1.5rem;">🏬</span> Perdagangan</span>
+                    <span><span style="font-size: 1.5rem;">📦</span> Lainnya</span>
+                </div>
+            </div>
+        </div>
+        
         <div id="map"></div>
+        
+        <div class="mt-2 text-muted small">
+            <span id="totalMarkers">0</span> UMKM ditampilkan
+        </div>
     </div>
 </section>
 
@@ -187,28 +238,112 @@ $(document).ready(function() {
         attribution: ''
     }).addTo(map);
     
+    // Custom icon function
+    function getBusinessIcon(type) {
+        const icons = {
+            'kuliner': '🍽️',
+            'fashion': '👕',
+            'kerajinan': '🎨',
+            'pertanian': '🌾',
+            'perikanan': '🐟',
+            'jasa': '⚙️',
+            'perdagangan': '🏬',
+            'lainnya': '📦'
+        };
+        
+        const emoji = icons[type] || '📍';
+        
+        return L.divIcon({
+            html: `<div style="font-size: 2rem; text-shadow: 0 0 3px white, 0 0 5px white;">${emoji}</div>`,
+            className: 'custom-marker',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        });
+    }
+    
+    let allBusinesses = [];
+    let markers = [];
+    let kecamatanList = new Set();
+    
     // Load businesses
     $.ajax({
         url: '/api/businesses',
         success: function(businesses) {
-            businesses.forEach(function(business) {
-                if (business.latitude && business.longitude) {
-                    const marker = L.marker([business.latitude, business.longitude]);
-                    
-                    marker.bindPopup(`
-                        <div style="min-width: 200px;">
-                            <h6 class="mb-2"><strong>${business.business_name}</strong></h6>
-                            <p class="mb-1"><small><i class="bi bi-geo-alt"></i> ${business.address}</small></p>
-                            <p class="mb-1"><small><i class="bi bi-tag"></i> ${business.business_type}</small></p>
-                            <a href="/business/${business.id}" class="btn btn-sm btn-primary mt-2">Detail</a>
-                        </div>
-                    `);
-                    
-                    marker.addTo(map);
-                }
+            allBusinesses = businesses;
+            
+            // Populate kecamatan dropdown
+            businesses.forEach(b => kecamatanList.add(b.district));
+            const sortedKecamatan = Array.from(kecamatanList).sort();
+            sortedKecamatan.forEach(kec => {
+                $('#filterKecamatan').append(`<option value="${kec}">${kec}</option>`);
             });
+            
+            // Display all markers initially
+            displayMarkers(businesses);
         }
     });
+    
+    // Display markers function
+    function displayMarkers(businesses) {
+        // Clear existing markers
+        markers.forEach(m => map.removeLayer(m));
+        markers = [];
+        
+        // Add new markers
+        businesses.forEach(function(business) {
+            if (business.latitude && business.longitude) {
+                const icon = getBusinessIcon(business.business_type);
+                const marker = L.marker([business.latitude, business.longitude], { icon: icon });
+                
+                marker.businessData = business; // Store for filtering
+                
+                marker.bindPopup(`
+                    <div style="min-width: 220px;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${getBusinessIcon(business.business_type).options.html.match(/>(.*?)</)[1]}</div>
+                        <h6 class="mb-2"><strong>${business.business_name}</strong></h6>
+                        <p class="mb-1"><small><i class="bi bi-tag"></i> ${business.business_type.toUpperCase()}</small></p>
+                        <p class="mb-1"><small><i class="bi bi-geo-alt"></i> ${business.address}</small></p>
+                        <a href="/business/${business.id}" class="btn btn-sm btn-primary mt-2 w-100">Lihat Detail</a>
+                    </div>
+                `);
+                
+                marker.addTo(map);
+                markers.push(marker);
+            }
+        });
+        
+        // Update counter
+        $('#totalMarkers').text(businesses.length);
+    }
+    
+    // Filter function
+    function filterBusinesses() {
+        const searchTerm = $('#searchBusiness').val().toLowerCase();
+        const kecamatan = $('#filterKecamatan').val();
+        const jenisUsaha = $('#filterJenisUsaha').val();
+        
+        const filtered = allBusinesses.filter(b => {
+            const matchSearch = !searchTerm || b.business_name.toLowerCase().includes(searchTerm);
+            const matchKecamatan = !kecamatan || b.district === kecamatan;
+            const matchJenisUsaha = !jenisUsaha || b.business_type === jenisUsaha;
+            
+            return matchSearch && matchKecamatan && matchJenisUsaha;
+        });
+        
+        displayMarkers(filtered);
+        
+        // Fit bounds if there are results
+        if (filtered.length > 0 && markers.length > 0) {
+            const group = L.featureGroup(markers);
+            map.fitBounds(group.getBounds().pad(0.1));
+        }
+    }
+    
+    // Event listeners
+    $('#searchBusiness').on('input', filterBusinesses);
+    $('#filterKecamatan').on('change', filterBusinesses);
+    $('#filterJenisUsaha').on('change', filterBusinesses);
 });
 </script>
 @endpush

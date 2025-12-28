@@ -16,6 +16,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // API untuk map - Get all approved businesses
 Route::get('/businesses', function () {
     return \App\Models\Business::where('status', 'approved')
-        ->select('id', 'business_name', 'address', 'business_type', 'latitude', 'longitude')
+        ->select('id', 'business_name', 'address', 'district', 'business_type', 'latitude', 'longitude')
         ->get();
 });
