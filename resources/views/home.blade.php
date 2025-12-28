@@ -239,64 +239,65 @@ $(document).ready(function() {
     const map = L.map('map').setView([2.9833, 99.6167], 11);
     console.log('Map initialized:', map);
     
-    // Google Streets - Jalan sangat jelas di semua zoom level
-    L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        attribution: '© Google Maps'
+    // OpenStreetMap - No label conflicts
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
     }).addTo(map);
     
-    // Custom icon function - Google Maps style dengan label nama
+    // Custom icon function - BESAR & TERANG untuk OSM
     function getBusinessIcon(type, businessName) {
         const config = {
-            'kuliner': { icon: '🍽️', color: '#EA4335' },      // Merah
-            'fashion': { icon: '👕', color: '#9C27B0' },      // Ungu
-            'kerajinan': { icon: '🎨', color: '#FF9800' },    // Orange
-            'pertanian': { icon: '🌾', color: '#4CAF50' },    // Hijau
-            'perikanan': { icon: '🐟', color: '#2196F3' },    // Biru
-            'jasa': { icon: '⚙️', color: '#607D8B' },         // Abu
-            'perdagangan': { icon: '🏬', color: '#00BCD4' },  // Cyan
-            'lainnya': { icon: '📦', color: '#795548' }       // Coklat
+            'kuliner': { icon: '🍽️', color: '#FF1744' },      // Neon Merah
+            'fashion': { icon: '👕', color: '#E040FB' },      // Neon Ungu
+            'kerajinan': { icon: '🎨', color: '#FF9100' },    // Neon Orange
+            'pertanian': { icon: '🌾', color: '#00E676' },    // Neon Hijau
+            'perikanan': { icon: '🐟', color: '#00B0FF' },    // Neon Biru
+            'jasa': { icon: '⚙️', color: '#FFD600' },         // Neon Kuning
+            'perdagangan': { icon: '🏬', color: '#00E5FF' },  // Neon Cyan
+            'lainnya': { icon: '📦', color: '#FF6E40' }       // Neon Orange Red
         };
         
-        const item = config[type] || { icon: '📍', color: '#2D5F3F' };
+        const item = config[type] || { icon: '📍', color: '#FF1744' };
         
         // Truncate nama jika terlalu panjang
-        const displayName = businessName.length > 18 ? businessName.substring(0, 18) + '...' : businessName;
+        const displayName = businessName.length > 15 ? businessName.substring(0, 15) + '...' : businessName;
         
         return L.divIcon({
             html: `
                 <div style="display: inline-block; text-align: center;">
                     <div style="
                         background: ${item.color};
-                        width: 32px;
-                        height: 32px;
+                        width: 48px;
+                        height: 48px;
                         border-radius: 50%;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        border: 2px solid white;
-                        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                        border: 4px solid white;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
                         cursor: pointer;
-                        margin: 0 auto 2px auto;
+                        margin: 0 auto 4px auto;
                     ">
-                        <span style="font-size: 1.1rem;">${item.icon}</span>
+                        <span style="font-size: 1.8rem;">${item.icon}</span>
                     </div>
                     <div style="
-                        background: rgba(255,255,255,0.95);
-                        color: #333;
-                        padding: 1px 4px;
-                        border-radius: 2px;
-                        font-size: 9px;
-                        font-weight: 600;
+                        background: ${item.color};
+                        color: white;
+                        padding: 3px 8px;
+                        border-radius: 4px;
+                        font-size: 11px;
+                        font-weight: 700;
                         white-space: nowrap;
-                        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+                        border: 2px solid white;
                     ">${displayName}</div>
                 </div>
             `,
-            className: 'marker-with-label',
-            iconSize: [32, 32],
-            iconAnchor: [16, 16],
-            popupAnchor: [0, -20]
+            className: 'marker-large-neon',
+            iconSize: [48, 48],
+            iconAnchor: [24, 24],
+            popupAnchor: [0, -30]
         });
     }
     
