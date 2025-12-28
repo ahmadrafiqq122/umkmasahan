@@ -28,7 +28,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Get business details for popup
+     * Get business details page (public view)
      */
     public function getBusinessDetail($id)
     {
@@ -36,10 +36,7 @@ class HomeController extends Controller
             ->approved()
             ->findOrFail($id);
 
-        return response()->json([
-            'success' => true,
-            'business' => $business,
-        ]);
+        return view('business-detail', compact('business'));
     }
 
     /**
