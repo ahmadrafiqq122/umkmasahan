@@ -185,16 +185,28 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
         
         if ($user->email_verified_at) {
-            return back()->with('error', 'Email sudah terverifikasi.');
+            return response()->json([
+                'success' => false,
+                'message' => 'Email sudah terverifikasi.'
+            ], 400);
         }
 
         $verificationCode = VerificationCode::createForEmail($user->email);
         
         try {
             Mail::to($user->email)->send(new VerificationCodeMail($verificationCode->code, $user->name));
-            return back()->with('success', 'Kode verifikasi baru telah dikirim ke email Anda.');
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Kode verifikasi baru telah dikirim ke email Anda.'
+            ]);
         } catch (\Exception $e) {
-            return back()->with('error', 'Gagal mengirim email. Silakan coba lagi.');
+            \Log::error('Resend verification code failed: ' . $e->getMessage());
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengirim email. Silakan coba lagi.'
+            ], 500);
         }
     }
 
