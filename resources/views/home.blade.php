@@ -239,13 +239,10 @@ $(document).ready(function() {
     const map = L.map('map').setView([2.9833, 99.6167], 11);
     console.log('Map initialized:', map);
     
-    // OpenStreetMap dengan multiple servers untuk reliability
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap',
-        subdomains: ['a', 'b', 'c'],
-        errorTileUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
-        crossOrigin: true
+    // Google Streets - Jalan sangat jelas di semua zoom level
+    L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        attribution: '© Google Maps'
     }).addTo(map);
     
     // Custom icon function - Google Maps style dengan label nama
