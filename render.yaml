@@ -39,7 +39,7 @@ services:
       - key: SEED_DATABASE
         value: true
       - key: DB_CONNECTION
-        value: mysql
+        value: pgsql
       - key: DB_HOST
         fromDatabase:
           name: umkmasahan-db
@@ -78,7 +78,8 @@ services:
         value: Peta Digital UMKM Asahan
 
 databases:
-  # MySQL Database
+  # PostgreSQL Database
   - name: umkmasahan-db
     databaseName: umkmasahan
     user: umkmasahan_user
+    plan: free
