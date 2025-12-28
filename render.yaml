@@ -1,0 +1,84 @@
+services:
+  # Web Service - Laravel Application
+  - type: web
+    name: umkmasahan
+    env: php
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+      php artisan storage:link || true
+    startCommand: |
+      php artisan migrate --force
+      php artisan db:seed --force --class=DatabaseSeeder || true
+      php -S 0.0.0.0:$PORT -t public
+    envVars:
+      - key: APP_NAME
+        value: Peta Digital UMKM Asahan
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        value: https://umkmasahan.onrender.com
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_DRIVER
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: MAP_CENTER_LAT
+        value: 2.9833
+      - key: MAP_CENTER_LNG
+        value: 99.6167
+      - key: MAP_ZOOM
+        value: 11
+      - key: SEED_DATABASE
+        value: true
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromDatabase:
+          name: umkmasahan-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: umkmasahan-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: umkmasahan-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: umkmasahan-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: umkmasahan-db
+          property: password
+      - key: MAIL_MAILER
+        value: smtp
+      - key: MAIL_HOST
+        value: smtp.gmail.com
+      - key: MAIL_PORT
+        value: 587
+      - key: MAIL_USERNAME
+        value: disperindagkop.asahan@gmail.com
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: MAIL_ENCRYPTION
+        value: tls
+      - key: MAIL_FROM_ADDRESS
+        value: disperindagkop.asahan@gmail.com
+      - key: MAIL_FROM_NAME
+        value: Peta Digital UMKM Asahan
+
+databases:
+  # MySQL Database
+  - name: umkmasahan-db
+    databaseName: umkmasahan
+    user: umkmasahan_user
