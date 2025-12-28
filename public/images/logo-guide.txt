@@ -1,0 +1,24 @@
+PANDUAN LOGO UNTUK KABUPATEN ASAHAN & DISPERINDAGKOP
+
+Untuk mengganti placeholder dengan logo asli:
+
+1. Logo Kabupaten Asahan:
+   - Simpan sebagai: public/images/logo-asahan.png
+   - Ukuran recommended: 500x500 px (transparent background)
+   - Format: PNG dengan background transparan
+
+2. Logo Dinas Koperasi, Perdagangan dan Perindustrian:
+   - Simpan sebagai: public/images/logo-disperindagkop.png
+   - Ukuran recommended: 500x500 px (transparent background)
+   - Format: PNG dengan background transparan
+
+3. Logo alternatif untuk header:
+   - Simpan sebagai: public/images/logo-header.png
+   - Ukuran recommended: landscape 200x80 px
+   - Format: PNG dengan background transparan
+
+Setelah menyimpan logo, refresh halaman untuk melihat perubahan.
+
+Saat ini aplikasi menggunakan icon placeholder dengan warna tema Kabupaten Asahan:
+- Hijau: #2D5F3F (warna utama)
+- Kuning Emas: #F4C430 (aksen)

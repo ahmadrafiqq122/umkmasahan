@@ -1,0 +1,22 @@
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="500" height="500" fill="#1a4d2e"/>
+  
+  <!-- Shield Shape -->
+  <path d="M250 50 L400 100 L400 300 Q400 400 250 450 Q100 400 100 300 L100 100 Z" 
+        fill="#2d6a4f" stroke="#FFD700" stroke-width="4"/>
+  
+  <!-- Inner Shield -->
+  <path d="M250 80 L370 120 L370 290 Q370 370 250 410 Q130 370 130 290 L130 120 Z" 
+        fill="#1a4d2e"/>
+  
+  <!-- Star -->
+  <polygon points="250,150 270,200 325,200 280,235 300,285 250,250 200,285 220,235 175,200 230,200" 
+           fill="#FFD700"/>
+  
+  <!-- Text -->
+  <text x="250" y="340" font-family="Arial, sans-serif" font-size="32" font-weight="bold" 
+        fill="#FFD700" text-anchor="middle">KAB. ASAHAN</text>
+  <text x="250" y="380" font-family="Arial, sans-serif" font-size="20" 
+        fill="#FFD700" text-anchor="middle">SUMATERA UTARA</text>
+</svg>

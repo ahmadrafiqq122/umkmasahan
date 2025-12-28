@@ -1,0 +1,17 @@
+[phases.setup]
+nixPkgs = ['php82', 'php82Packages.composer']
+
+[phases.install]
+cmds = [
+    'composer install --no-dev --optimize-autoloader',
+    'php artisan package:discover --ansi'
+]
+
+[phases.build]
+cmds = [
+    'npm install',
+    'npm run build'
+]
+
+[start]
+cmd = 'sh railway-entrypoint.sh'
