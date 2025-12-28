@@ -236,8 +236,8 @@ $(document).ready(function() {
         attribution: ''
     }).addTo(map);
     
-    // Custom icon function
-    function getBusinessIcon(type) {
+    // Custom icon function dengan pin + nama usaha
+    function getBusinessIcon(type, businessName) {
         const icons = {
             'kuliner': '🍽️',
             'fashion': '👕',
@@ -251,12 +251,47 @@ $(document).ready(function() {
         
         const emoji = icons[type] || '📍';
         
+        // Truncate nama usaha jika terlalu panjang
+        const truncatedName = businessName.length > 20 ? businessName.substring(0, 20) + '...' : businessName;
+        
         return L.divIcon({
-            html: `<div style="font-size: 2rem; text-shadow: 0 0 3px white, 0 0 5px white;">${emoji}</div>`,
-            className: 'custom-marker',
-            iconSize: [40, 40],
+            html: `
+                <div style="text-align: center;">
+                    <div style="
+                        background: #2D5F3F;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50% 50% 50% 0;
+                        transform: rotate(-45deg);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: 3px solid white;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                    ">
+                        <div style="
+                            font-size: 1.2rem;
+                            transform: rotate(45deg);
+                        ">${emoji}</div>
+                    </div>
+                    <div style="
+                        background: white;
+                        color: #2D5F3F;
+                        padding: 2px 6px;
+                        border-radius: 4px;
+                        font-size: 0.7rem;
+                        font-weight: 600;
+                        white-space: nowrap;
+                        box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+                        margin-top: 2px;
+                        border: 1px solid #2D5F3F;
+                    ">${truncatedName}</div>
+                </div>
+            `,
+            className: 'custom-marker-with-label',
+            iconSize: [80, 80],
             iconAnchor: [20, 40],
-            popupAnchor: [0, -40]
+            popupAnchor: [0, -45]
         });
     }
     
@@ -291,7 +326,7 @@ $(document).ready(function() {
         // Add new markers
         businesses.forEach(function(business) {
             if (business.latitude && business.longitude) {
-                const icon = getBusinessIcon(business.business_type);
+                const icon = getBusinessIcon(business.business_type, business.business_name);
                 const marker = L.marker([business.latitude, business.longitude], { icon: icon });
                 
                 marker.businessData = business; // Store for filtering

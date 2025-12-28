@@ -238,62 +238,43 @@ $(document).ready(function() {
         attribution: ''
     }).addTo(map);
     
-    // Custom icon function dengan pin + nama usaha
+    // Custom icon function - Google Maps style
     function getBusinessIcon(type, businessName) {
-        const icons = {
-            'kuliner': '🍽️',
-            'fashion': '👕',
-            'kerajinan': '🎨',
-            'pertanian': '🌾',
-            'perikanan': '🐟',
-            'jasa': '⚙️',
-            'perdagangan': '🏬',
-            'lainnya': '📦'
+        const config = {
+            'kuliner': { icon: '🍽️', color: '#EA4335' },      // Merah
+            'fashion': { icon: '👕', color: '#9C27B0' },      // Ungu
+            'kerajinan': { icon: '🎨', color: '#FF9800' },    // Orange
+            'pertanian': { icon: '🌾', color: '#4CAF50' },    // Hijau
+            'perikanan': { icon: '🐟', color: '#2196F3' },    // Biru
+            'jasa': { icon: '⚙️', color: '#607D8B' },         // Abu
+            'perdagangan': { icon: '🏬', color: '#00BCD4' },  // Cyan
+            'lainnya': { icon: '📦', color: '#795548' }       // Coklat
         };
         
-        const emoji = icons[type] || '📍';
-        
-        // Truncate nama usaha jika terlalu panjang
-        const truncatedName = businessName.length > 20 ? businessName.substring(0, 20) + '...' : businessName;
+        const item = config[type] || { icon: '📍', color: '#2D5F3F' };
         
         return L.divIcon({
             html: `
-                <div style="text-align: center;">
-                    <div style="
-                        background: #2D5F3F;
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50% 50% 50% 0;
-                        transform: rotate(-45deg);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        border: 3px solid white;
-                        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-                    ">
-                        <div style="
-                            font-size: 1.2rem;
-                            transform: rotate(45deg);
-                        ">${emoji}</div>
-                    </div>
-                    <div style="
-                        background: white;
-                        color: #2D5F3F;
-                        padding: 2px 6px;
-                        border-radius: 4px;
-                        font-size: 0.7rem;
-                        font-weight: 600;
-                        white-space: nowrap;
-                        box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-                        margin-top: 2px;
-                        border: 1px solid #2D5F3F;
-                    ">${truncatedName}</div>
+                <div style="
+                    background: ${item.color};
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 3px solid white;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+                    cursor: pointer;
+                    transition: transform 0.2s;
+                ">
+                    <span style="font-size: 1.3rem;">${item.icon}</span>
                 </div>
             `,
-            className: 'custom-marker-with-label',
-            iconSize: [80, 80],
-            iconAnchor: [20, 40],
-            popupAnchor: [0, -45]
+            className: 'marker-icon',
+            iconSize: [36, 36],
+            iconAnchor: [18, 18],
+            popupAnchor: [0, -18]
         });
     }
     
